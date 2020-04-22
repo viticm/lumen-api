@@ -44,6 +44,15 @@ class ArticleController extends Controller
         if ($request->has('type')) {
             $query->where('type', $request->input('type'));
         }
+        if ($request->has('sort')) {
+            $sort = $request->input('sort');
+            $query->orderBy(substr($sort, 1), substr($sort, 0, 1) === '-' ? 'desc' : 'asc');
+        }
+        $importance = $request->input('importance');
+        if (! empty($importance)) {
+            $query->where('importance', $importance);
+        }
+
         $list = $query->get()->toArray();
         return $this->succeed(['total' => $count, 'items' => $list]);
     }

@@ -28,3 +28,7 @@ Homestead.json
 
 cscope.* 
 tags
+cscope.files
+cscope.in.out
+cscope.out
+cscope.po.out
