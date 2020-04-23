@@ -30,7 +30,7 @@ class CreateArticlesTable extends Migration
             $table->text('image_uri')->nullable()->comment('图片路径');
             $table->string('platforms', 64)->comment('平台列表')->nullable();
             $table->string('remark', 255)->comment('评论')->nullable();
-            $table->timestamp('display_time')->comment('展示时间')->nullable();
+            $table->timestamp('display_time')->comment('展示时间');
 
             $table->timestamps();
 

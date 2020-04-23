@@ -41,6 +41,7 @@ $factory->define(Article::class, function (Faker $faker) {
         'image_uri' => $faker->imageUrl,
         'platforms' => json_encode(['a-platform']),
         'remark' => 'This is a test remark.',
+        'display_time' => $faker->dateTime,
     ];
 });
 
