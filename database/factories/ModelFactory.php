@@ -40,6 +40,7 @@ $factory->define(Article::class, function (Faker $faker) {
         'pageviews' => $faker->numberBetween(0, 100000),
         'image_uri' => $faker->imageUrl,
         'platforms' => json_encode(['a-platform']),
+        'remark' => 'This is a test remark.',
     ];
 });
 

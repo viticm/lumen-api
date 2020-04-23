@@ -44,7 +44,7 @@ class AuthController extends Controller
         // 注册记录校验
         $row = User::where('username', $username)->orWhere('email', $email)->first();
         if($row !== null) {
-            return $this->faied("当前邮箱或用户名已被注册");
+            return $this->failed("当前邮箱或用户名已被注册");
         }
         $passwordHasher = new PasswordHash(8, false);
 
@@ -55,7 +55,7 @@ class AuthController extends Controller
         $user->password = $passwordHasher->HashPassword($password);
 
         if($user->save() === false) {
-            return $this->faied("用户注册失败");
+            return $this->failed("用户注册失败");
         }
         return $this->successd();
     }
@@ -84,7 +84,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
             $errors = $validator->errors();
-            return $this->faied($errors->first(), 60203);
+            return $this->failed($errors->first(), 60203);
         }
 
         $email = $request->input('username');
@@ -92,20 +92,20 @@ class AuthController extends Controller
         $user = User::where('email', $email)->first();
         Log::info("email: ".$email." password: ".$password);
         if (is_null($user)) {
-            return $this->faied('当前用户不存在', 60204);
+            return $this->failed('当前用户不存在', 60204);
         }
         if ($user->active !== 1) {
-            return $this->faied('用户已被禁用', 60205);
+            return $this->failed('用户已被禁用', 60205);
         }
         $passwordHasher = new PasswordHash(8, false);
         // Check password.
         if ($passwordHasher->CheckPassword($password, $user->password) === false) {
-            return $this->faied('密码错误');
+            return $this->failed('密码错误');
         }
         // Generate the token.
         $user->remember_token = Str::random(60); //这个token会不会重复？
         if ($user->save() === false) {
-            return $this->faied('登陆错误');
+            return $this->failed('登陆错误');
         }
         return $this->succeed(['token'=> $user->remember_token]);
     }
@@ -146,7 +146,7 @@ class AuthController extends Controller
             // The data must be a array.
             return $this->succeed($user->toArray());
         }
-        return $this->faied('Maybe you need relogin');
+        return $this->failed('Maybe you need relogin');
     }
 
     /**

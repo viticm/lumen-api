@@ -40,14 +40,22 @@ class TransactionController extends Controller
      **/
     public function users(Request $request)
     {
-        return $this->succeed([
+        $names = [
             ['name' => '111'],
             ['name' => '222'],
             ['name' => '333'],
             ['name' => '444'],
             ['name' => '555'],
             ['name' => '666'],
-        ]);
+        ];
+        $search_name = $request->input('name');
+        $r = $names;
+        if (! empty($search_name)) {
+            $r = array_filter($names, function($value) use ($search_name) {
+                return strpos($value['name'], $search_name) !== false;
+            });
+        }
+        return $this->succeed(['items' => $r]);
     }
 
 

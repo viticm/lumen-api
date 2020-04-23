@@ -9,10 +9,12 @@
  * @date 2020/04/21 15:38
  * @uses Article controller class.
  *          * 文章相关
+ *          * 所有保存到数据库的字段应当做长度校验，目前都没有处理
 */
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Util;
@@ -66,6 +68,7 @@ class ArticleController extends Controller
     {
         $id = $request->input('id');
         $row = Article::where('id', $id)->first();
+        Log::info('The detail: ', $row->toArray());
         return ! is_null($row) ? $this->succeed($row) : $this->failed();
     }
 
@@ -91,18 +94,15 @@ class ArticleController extends Controller
      **/
     public function create(Request $request)
     {
-        $data = $request->input('data');
-        if (empty($data)) {
-            return $this->faied();
-        }
-        $info = json_decode($data, true);
+        $data = $request->all();
+        $data['display_time'] = Carbon::createFromTimestamp(strtotime($data['display_time']));
         $article = new Article();
-        foreach ($info as $name => $value) {
+        foreach ($data as $name => $value) {
             if ($name !== 'id') {
                 $article->$name = $value;
             }
         }
-        return $article->save() ? $this->succeed() : $this->faied();
+        return $article->save() ? $this->succeed(['id' => $article->id]) : $this->failed();
     }
 
    /**
@@ -112,17 +112,14 @@ class ArticleController extends Controller
      **/
     public function update(Request $request)
     {
-        $data = $request->input('data');
-        if (empty($data)) {
-            return $this->faied();
-        }
-        $info = json_decode($data, true);
-        $article = Article::where('id', $data['id']);
-        if (is_null($article)) return $this->faied();
-        foreach ($info as $name => $value) {
+        $data = $request->all();
+        $data['display_time'] = Carbon::createFromTimestamp(strtotime($data['display_time']));
+        $article = Article::where('id', $data['id'])->first();
+        if (is_null($article)) return $this->failed();
+        foreach ($data as $name => $value) {
             'id' === $name ? : $article->$name = $value; // 简洁写法，可以对比下create
         }
-        return $article->save() ? $this->succeed() : $this->faied();
+        return $article->save() ? $this->succeed(['id' => $article->id]) : $this->failed();
     }
 
 }

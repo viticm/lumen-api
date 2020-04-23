@@ -14,7 +14,7 @@ class Controller extends BaseController
     * @param int $code 返回的标志码
     * @return \Illuminate\Http\JsonResponse
     **/
-    public function succeed($data = [], $message = "successd", $code = 20000)
+    public function succeed($data = [], $message = "succeed", $code = 20000)
     {
          return response()->json(
             ['message' => $message, 'code' => $code, 'data'=> $data]);
@@ -26,7 +26,7 @@ class Controller extends BaseController
     * @param int $code 返回的错误码
     * @return \Illuminate\Http\JsonResponse
     **/
-    public function faied($message = "failed", $code = -1)
+    public function failed($message = "failed", $code = -1)
     {
         return response()->json(['message' => $message, 'code' => $code]);
     }
