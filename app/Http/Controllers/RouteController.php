@@ -85,7 +85,7 @@ class RouteController extends Controller
         list($all, $constant, $async) = [ $lists['all'], $lists['constant'], $lists['async'] ];
         static::convertJS($constant);
         static::convertJS($async);
-        Storage::put(static::$jsonFile, json_encode($all));
+        Storage::put(static::$jsonFile, json_encode($all, JSON_PRETTY_PRINT));
 
         Storage::put(static::$jsFile, '/* This file is generate by lumen api(leafly) */'."\n");
         Storage::append(static::$jsFile, 'import Layout from \'@/layout\''."\n");
