@@ -3,14 +3,16 @@
 use App\Models\Role;
 use App\Models\Route;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
-global $list;
+global $list, $list_new;
 
 $list = "
 [{
 		\"path\": \"/redirect\",
 		\"component\": \"layout/Layout\",
 		\"hidden\": true,
+		\"constant\": true,
 		\"children\": [{
 			\"path\": \"/redirect/:path*\",
 			\"component\": \"views/redirect/index\"
@@ -18,26 +20,31 @@ $list = "
 	},
 	{
 		\"path\": \"/login\",
+		\"constant\": true,
 		\"component\": \"views/login/index\",
 		\"hidden\": true
 	},
 	{
 		\"path\": \"/auth-redirect\",
+		\"constant\": true,
 		\"component\": \"views/login/auth-redirect\",
 		\"hidden\": true
 	},
 	{
 		\"path\": \"/404\",
+		\"constant\": true,
 		\"component\": \"views/error-page/404\",
 		\"hidden\": true
 	},
 	{
 		\"path\": \"/401\",
+		\"constant\": true,
 		\"component\": \"views/error-page/401\",
 		\"hidden\": true
 	},
 	{
 		\"path\": \"\",
+		\"constant\": true,
 		\"component\": \"layout/Layout\",
 		\"redirect\": \"dashboard\",
 		\"children\": [{
@@ -606,6 +613,102 @@ $list = "
 ]
 ";
 
+$list_new = "
+[   {
+		\"path\": \"/redirect\",
+		\"component\": \"Layout\",
+		\"hidden\": true,
+		\"constant\": true,
+		\"children\": [{
+			\"path\": \"/redirect/:path*\",
+			\"component\": \"views/redirect\"
+		}]
+	},
+	{
+		\"path\": \"/signin\",
+		\"constant\": true,
+		\"component\": \"views/signin\",
+		\"hidden\": true
+	},
+	{
+		\"path\": \"/auth-redirect\",
+		\"constant\": true,
+		\"component\": \"views/auth-redirect\",
+		\"hidden\": true
+	},
+	{
+		\"path\": \"/404\",
+		\"constant\": true,
+		\"component\": \"views/error-page/404\",
+		\"hidden\": true
+	},
+	{
+		\"path\": \"/401\",
+		\"constant\": true,
+		\"component\": \"views/error-page/401\",
+		\"hidden\": true
+	},
+	{
+		\"path\": \"/\",
+		\"constant\": true,
+		\"component\": \"Layout\",
+		\"redirect\": \"/dashboard\",
+        \"meta\": {
+            \"title\": \"index\",
+            \"icon\": \"mdi-chevron-up\",
+            \"icon-alt\": \"mdi-chevron-down\",
+            \"affix\": true
+        },
+        \"children\": [
+        {
+			\"path\": \"dashboard\",
+			\"component\": \"views/dashboard\",
+			\"name\": \"Dashboard\",
+			\"meta\": {
+				\"title\": \"dashboard\",
+				\"icon\": \"mdi-view-dashboard\",
+				\"affix\": true
+			}
+        },
+        {
+			\"path\": \"settings\",
+			\"component\": \"views/settings\",
+			\"name\": \"settings\",
+			\"meta\": {
+				\"title\": \"settings\",
+				\"icon\": \"mdi-image-filter-vintage\",
+				\"affix\": true
+			}
+        }
+        ]
+    },
+    {
+        \"path\": \"/route\",
+        \"component\": \"Layout\",
+        \"redirect\": \"/route/table\",
+        \"name\": \"route\",
+        \"meta\": {
+            \"title\": \"routes\",
+            \"icon\": \"mdi-chevron-up\",
+            \"icon-alt\": \"mdi-chevron-down\",
+            \"affix\": true
+        },
+        \"children\": [
+        {
+			\"path\": \"table\",
+			\"component\": \"views/route/table\",
+			\"name\": \"routeTable\",
+			\"meta\": {
+				\"title\": \"routes\",
+				\"icon\": \"mdi-router\",
+				\"affix\": true
+			}
+        }
+        ]
+    }
+]
+";
+
 class RoutesTableSeeder extends Seeder
 {
 
@@ -621,6 +724,9 @@ class RoutesTableSeeder extends Seeder
     {
         $role = new Route();
         $children_ids = [];
+        if (array_key_exists('id', $array)) { 
+            unset($array['id']);
+        }
         foreach ($array as $k => $v) {
             if ($k != 'children') {
                 $role->$k = 'meta' == $k ? json_encode($v) : $v;
@@ -664,8 +770,9 @@ class RoutesTableSeeder extends Seeder
      */
     public function run()
     {
-        global $list;
-		$array = json_decode($list, true);
+        global $list_new;
+        $fileStr = Storage::get('routes.json');
+		$array = json_decode($fileStr ? $fileStr : $list_new, true);
         $admin_ids = [];
         $editor_ids = [];
         $visitor_ids = [];
@@ -675,9 +782,10 @@ class RoutesTableSeeder extends Seeder
             $this->insert_one($val, $ids);
             if (count($ids) > 0) {
                 $path = $val['path'];
-                if ('' == $path) {
+                if ('/' === $path) {
                     $visitor_ids = array_merge($visitor_ids, $ids);
-                } elseif ($path !== '/permission') {
+                } 
+                if ($path !== '/permission') {
                     $editor_ids = array_merge($editor_ids, $ids);
                 }
                 $admin_ids = array_merge($admin_ids, $ids);

@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
         $user = new User();
         $user->email = $email;
         $user->username = $username;
-        $user->roles = '["admin"]';
+        $user->role = 'admin';
         $user->password = $password;
         $user->avatar = $avatar;
         $user->save();

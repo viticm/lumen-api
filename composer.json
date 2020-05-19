@@ -9,6 +9,7 @@
         "fruitcake/laravel-cors": "^1.0",
         "hautelook/phpass": "1.1.0",
         "laravel/lumen-framework": "^7.0",
+        "league/flysystem": "^1.0",
         "orangehill/iseed": "^2.6"
     },
     "require-dev": {

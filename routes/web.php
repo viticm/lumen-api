@@ -58,6 +58,9 @@ $router->group(['prefix' => 'lumen-api'], function () use ($router) {
         $router->put('role/{id}', 'RoleController@update');
         $router->post('role', 'RoleController@add');
 
+        // Route operate.
+        $router->get('routetable', 'RouteController@table');
+
         // Article operate.
         $router->get('article/list', 'ArticleController@get_list');
         $router->get('article/detail', 'ArticleController@detail');

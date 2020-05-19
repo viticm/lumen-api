@@ -19,6 +19,7 @@ use illuminate\support\Str;
 use Illuminate\Http\Request;
 use Hautelook\Phpass\PasswordHash;
 use App\Models\User;
+use App\Models\Role;
 use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
@@ -143,6 +144,10 @@ class AuthController extends Controller
                 'introduction'  => $user->introduction
             ];
             */
+            if (! empty($user->role)) {
+                $user->routes = Role::routes($user->role);
+                Log::info('routes:', $user->routes);
+            }
             // The data must be a array.
             return $this->succeed($user->toArray());
         }

@@ -25,63 +25,13 @@ class RoleController extends Controller
 {
  
     /**
-     * Fill a route array from db
-     * @param array $all The routes all list.
-     * @param array $info The one route info.
-     * @param integer $times The function recursive times.
-     * @return array
-     **/
-    public static function routeFill(&$all, &$info, &$times)
-    {
-        $times += 1;
-        if ($times > 99) return; // Safe code for recursive.
-        $r = [];
-        foreach ($info as $k => $v) {
-            if (!is_null($v) && !in_array($k, static::$routeHidden)) {
-                // 这只是一个比较简洁的写法，不建议初学者这样写
-                $r[$k] = 'meta' === $k ? json_decode($v) : ('hidden' == $k || 'alwaysShow' == $k ? $v !== 0 : $v);
-            }
-        }
-       if (!empty($info['children'])) {
-            $r['children'] = [];
-            $children = explode(':', $info['children']);
-            foreach ($children as $id) {
-                array_push($r['children'], static::routeFill($all, $all[$id], $times)); // recursive self function.
-            }
-        }
-        return $r;
-    }
-
-     /**
-     * Role all routes array from db
-     * @return array
-     **/
-    public static function routes_array()
-    {
-        $all = Route::all()->toArray();
-        $array = [];
-        foreach ($all as $v) {
-            $array[$v['id']] = $v;
-        }
-        $r = [];
-        foreach ($array as $id => $info) {
-            if ($info['root'] === 1) {
-                $times = 0;
-                $one = static::routeFill($array, $info, $times);
-                array_push($r, $one);
-            }
-        }
-        return $r;
-    }
-
-    /**
      * Role all routes
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse json
      **/
     public function routes(Request $request)
     {
-        $all = static::routes_array();
+        $all = Route::getList();
         return $this->succeed($all);
     }
 
@@ -93,7 +43,7 @@ class RoleController extends Controller
     public function roles(Request $request)
     {
         $all = Role::all()->toArray();
-        $routes = static::routes_array();
+        $routes = Route::getList();
         foreach ($all as $key => $info) {
             // Log::info("routes: " . $info['routes'] . ' ' . (empty($info['routes']) ? 0 : 1));
             if (!empty($info['routes'])) {
@@ -180,6 +130,5 @@ class RoleController extends Controller
     public static $routeHidden = [
         'children', 'root', 'created_at', 'updated_at'
     ];
-
 
 }

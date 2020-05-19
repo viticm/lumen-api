@@ -24,6 +24,7 @@ class CreateRoutesTable extends Migration
             $table->boolean('alwaysShow')->default(0)->comment('是否常驻');
             $table->boolean('hidden')->default(0)->comment('是否隐藏');
             $table->boolean('root')->default(0)->comment('是否为一级路由');
+            $table->boolean('constant')->default(0)->comment('是否固定');
             $table->timestamps();
         });
     }

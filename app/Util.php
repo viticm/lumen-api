@@ -26,7 +26,7 @@ class Util
     public static function arrayPluck($arrary, $value, $depth = INF)
     {
         $r = [];
-        foreach($arrary as $k => $v) {
+        foreach ($arrary as $k => $v) {
             if (! is_array($v)) {
                 if ($k === $value) {
                     $r[] = $v;
@@ -40,6 +40,24 @@ class Util
                 }
             }
         }
+        return $r;
+    }
+
+    /**
+     * Get a javascript object string from an array.
+     *
+     * @param array $arrary The source array.
+     *
+     * @return string
+     */
+    public static function arrayToJS($array)
+    {
+        if (! is_array($array)) return '';
+        $jsonStr = json_encode($array, JSON_PRETTY_PRINT);
+        $r = preg_replace('/"(\w+)":/', '$1:', $jsonStr);
+        $r = str_replace('\/', '/', $r);
+        $r = str_replace('"', '\'', $r);
+        $r = str_replace('    ', '  ', $r);
         return $r;
     }
 

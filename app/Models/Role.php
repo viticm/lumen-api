@@ -24,4 +24,25 @@ class Role extends Model
     protected $hidden = [
 
     ];
+
+    /**
+     * Get routes from a key.
+     *
+     * @param string $key The key.
+     *
+     * @return array
+     **/
+    public static function routes($key)
+    {
+        $role = static::where('key', $key)->first();
+        $r = [];
+        if (! is_null($role)) {
+            $r = explode(':', $role->routes);
+            foreach ($r as $k => &$v) {
+                $v = (int)$v;
+            }
+        }
+        return $r;
+    }
+
 }

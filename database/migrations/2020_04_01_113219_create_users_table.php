@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 60)->comment('密码');
             $table->string('remember_token', 60)->comment('验证字符串')->nullable();
             $table->string('name', 100)->comment('昵称')->default('懒猪');
-            $table->string('roles', 100)->comment('角色列表json');
+            $table->string('role', 100)->comment('角色KEY');
             $table->string('introduction', 100)
                   ->comment('个人介绍')->default('这家伙很懒，什么也没留下');
             $table->string('avatar', 100)->comment('头像')->default('');
