@@ -164,7 +164,7 @@ class AuthController extends Controller
         $token = $request->input('token');
         $user = User::where('remember_token', $token)->first();
         $succeed = true;
-        if (!is_null($user)) {
+        if (! is_null($user)) {
             $user->remember_token = '';
             $succeed = $user->save();
         }

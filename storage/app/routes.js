@@ -122,9 +122,61 @@ export const asyncRoutes = [
         path: 'table',
         component: () => import('@/views/route/table'),
         meta: {
-          title: 'routes',
+          title: 'routeTable',
           icon: 'mdi-router',
           affix: true
+        },
+        alwaysShow: false,
+        hidden: false
+      }
+    ]
+  },
+  {
+    id: 15,
+    name: 'Permission',
+    path: '/permission',
+    component: Layout,
+    redirect: '/permission/page',
+    meta: {
+      title: 'permission',
+      icon: 'mdi-chevron-up',
+      'icon-alt': 'mdi-chevron-down'
+    },
+    alwaysShow: true,
+    hidden: false,
+    children: [
+      {
+        id: 12,
+        name: 'PagePermission',
+        path: 'page',
+        component: () => import('@/views/permission/page'),
+        redirect: '',
+        meta: {
+          title: 'pagePermission'
+        },
+        alwaysShow: false,
+        hidden: false
+      },
+      {
+        id: 13,
+        name: 'DirectivePermission',
+        path: 'directive',
+        component: () => import('@/views/permission/directive'),
+        redirect: '',
+        meta: {
+          title: 'directivePermission'
+        },
+        alwaysShow: false,
+        hidden: false
+      },
+      {
+        id: 14,
+        name: 'RolePermission',
+        path: 'role',
+        component: () => import('@/views/permission/role'),
+        redirect: '',
+        meta: {
+          title: 'rolePermission'
         },
         alwaysShow: false,
         hidden: false

@@ -43,15 +43,15 @@ class RoleController extends Controller
     public function roles(Request $request)
     {
         $all = Role::all()->toArray();
-        $routes = Route::getList();
+        // $routes = Route::getList();
         foreach ($all as $key => $info) {
             // Log::info("routes: " . $info['routes'] . ' ' . (empty($info['routes']) ? 0 : 1));
             if (!empty($info['routes'])) {
                 $children_ids = explode(':', $info['routes']);
                 // Log::info('routes: ', $children_ids);
-                $all[$key]['routes'] = array_values(array_filter($routes, function($v, $k) use ($children_ids) {
+                $all[$key]['routes'] = $children_ids; /*array_values(array_filter($routes, function($v, $k) use ($children_ids) {
                     return in_array(strval($v['id']), $children_ids);
-                }, ARRAY_FILTER_USE_BOTH));
+                }, ARRAY_FILTER_USE_BOTH));*/
                 // Log::info('json: '. json_encode($all[$key]['routes']));
             }
         }

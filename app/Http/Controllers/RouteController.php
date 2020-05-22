@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2014- viticm( viticm.ti@gmail.com )
  * @license
  * @user viticm<viticm.ti@gmail.com>
- * @date 2020/05/09 11:16
+ * @date 2020/05/19 20:13
  * @uses The route controller.
  */
 
@@ -56,6 +56,41 @@ class RouteController extends Controller
         return $this->succeed($all);
     }
 
+    /**
+     * 保存
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse json
+     **/
+    public function save(Request $request)
+    {
+        $route = null;
+        $data = $request->all();
+        if ($request->has('id')) {
+            $route = Route::where('id', $request->input('id'))->first();
+        }
+        $route = $route ?? new Route();
+        foreach ($data as $name => $value) {
+            if ($name !== 'id') {
+                $route->$name = $value;
+            }
+        }
+        return $route->save() ? $this->succeed(['id' => $route->id]) : $this->failed();
+    }
+
+    /**
+     * 删除
+     * @param number $id
+     * @return \Illuminate\Http\JsonResponse json
+     **/
+    public function delete($id)
+    {
+        $route = Route::where('id', $id)->first();
+        if (! is_null($route)) {
+            $route->delete();
+        }
+        return $this->succeed();
+    }
+
      /**
      * 转换JS代码（路由中用到的）
      * @return array $array The source array.
@@ -68,7 +103,11 @@ class RouteController extends Controller
         foreach ($array as $k => &$v) {
             if (! is_array($v)) {
                 if ('component' === $k && ! in_array($v, static::$notImportComponents)) {
-                    $v = "() => import('@/".$v."')";
+                    if (empty($v)) {
+                        unset($array[$k]);
+                    } else {
+                        $v = "() => import('@/".$v."')";
+                    }
                 }
             } elseif ($depth >= 1) {
                 static::convertJS($v, $depth - 1);
