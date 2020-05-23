@@ -181,5 +181,33 @@
                 "constant": false
             }
         ]
+    },
+    {
+        "id": 16,
+        "name": "icons",
+        "path": "\/icons",
+        "component": "Layout",
+        "redirect": "",
+        "meta": {
+            "icon": "mdi-tools"
+        },
+        "alwaysShow": true,
+        "hidden": false,
+        "constant": true,
+        "children": [
+            {
+                "id": 17,
+                "name": "IconShow",
+                "path": "index",
+                "component": "views\/icons",
+                "redirect": "",
+                "meta": {
+                    "title": "icons"
+                },
+                "alwaysShow": false,
+                "hidden": false,
+                "constant": false
+            }
+        ]
     }
 ]

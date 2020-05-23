@@ -12,15 +12,12 @@ export const constantRoutes = [
     id: 2,
     path: '/redirect',
     component: Layout,
-    alwaysShow: false,
     hidden: true,
     children: [
       {
         id: 1,
         path: '/redirect/:path*',
-        component: () => import('@/views/redirect'),
-        alwaysShow: false,
-        hidden: false
+        component: () => import('@/views/redirect')
       }
     ]
   },
@@ -28,28 +25,24 @@ export const constantRoutes = [
     id: 3,
     path: '/signin',
     component: () => import('@/views/signin'),
-    alwaysShow: false,
     hidden: true
   },
   {
     id: 4,
     path: '/auth-redirect',
     component: () => import('@/views/auth-redirect'),
-    alwaysShow: false,
     hidden: true
   },
   {
     id: 5,
     path: '/404',
     component: () => import('@/views/error-page/404'),
-    alwaysShow: false,
     hidden: true
   },
   {
     id: 6,
     path: '/401',
     component: () => import('@/views/error-page/401'),
-    alwaysShow: false,
     hidden: true
   },
   {
@@ -63,8 +56,6 @@ export const constantRoutes = [
       'icon-alt': 'mdi-chevron-down',
       affix: true
     },
-    alwaysShow: false,
-    hidden: false,
     children: [
       {
         id: 7,
@@ -75,9 +66,7 @@ export const constantRoutes = [
           title: 'dashboard',
           icon: 'mdi-view-dashboard',
           affix: true
-        },
-        alwaysShow: false,
-        hidden: false
+        }
       },
       {
         id: 8,
@@ -88,9 +77,28 @@ export const constantRoutes = [
           title: 'settings',
           icon: 'mdi-image-filter-vintage',
           affix: true
-        },
-        alwaysShow: false,
-        hidden: false
+        }
+      }
+    ]
+  },
+  {
+    id: 16,
+    name: 'icons',
+    path: '/icons',
+    component: Layout,
+    meta: {
+      icon: 'mdi-tools'
+    },
+    alwaysShow: true,
+    children: [
+      {
+        id: 17,
+        name: 'IconShow',
+        path: 'index',
+        component: () => import('@/views/icons'),
+        meta: {
+          title: 'icons'
+        }
       }
     ]
   }
@@ -113,8 +121,6 @@ export const asyncRoutes = [
       'icon-alt': 'mdi-chevron-down',
       affix: true
     },
-    alwaysShow: false,
-    hidden: false,
     children: [
       {
         id: 10,
@@ -125,9 +131,7 @@ export const asyncRoutes = [
           title: 'routeTable',
           icon: 'mdi-router',
           affix: true
-        },
-        alwaysShow: false,
-        hidden: false
+        }
       }
     ]
   },
@@ -143,43 +147,33 @@ export const asyncRoutes = [
       'icon-alt': 'mdi-chevron-down'
     },
     alwaysShow: true,
-    hidden: false,
     children: [
       {
         id: 12,
         name: 'PagePermission',
         path: 'page',
         component: () => import('@/views/permission/page'),
-        redirect: '',
         meta: {
           title: 'pagePermission'
-        },
-        alwaysShow: false,
-        hidden: false
+        }
       },
       {
         id: 13,
         name: 'DirectivePermission',
         path: 'directive',
         component: () => import('@/views/permission/directive'),
-        redirect: '',
         meta: {
           title: 'directivePermission'
-        },
-        alwaysShow: false,
-        hidden: false
+        }
       },
       {
         id: 14,
         name: 'RolePermission',
         path: 'role',
         component: () => import('@/views/permission/role'),
-        redirect: '',
         meta: {
           title: 'rolePermission'
-        },
-        alwaysShow: false,
-        hidden: false
+        }
       }
     ]
   }

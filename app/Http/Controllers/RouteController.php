@@ -102,12 +102,10 @@ class RouteController extends Controller
         unset($array['constant']);
         foreach ($array as $k => &$v) {
             if (! is_array($v)) {
-                if ('component' === $k && ! in_array($v, static::$notImportComponents)) {
-                    if (empty($v)) {
-                        unset($array[$k]);
-                    } else {
-                        $v = "() => import('@/".$v."')";
-                    }
+                if (empty($v)) {
+                    unset($array[$k]);
+                } else if ('component' === $k && ! in_array($v, static::$notImportComponents)) {
+                    $v = "() => import('@/".$v."')";
                 }
             } elseif ($depth >= 1) {
                 static::convertJS($v, $depth - 1);

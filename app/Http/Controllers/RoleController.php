@@ -48,6 +48,9 @@ class RoleController extends Controller
             // Log::info("routes: " . $info['routes'] . ' ' . (empty($info['routes']) ? 0 : 1));
             if (!empty($info['routes'])) {
                 $children_ids = explode(':', $info['routes']);
+                foreach ($children_ids as &$id) {
+                    $id = (int)$id;
+                }
                 // Log::info('routes: ', $children_ids);
                 $all[$key]['routes'] = $children_ids; /*array_values(array_filter($routes, function($v, $k) use ($children_ids) {
                     return in_array(strval($v['id']), $children_ids);
@@ -60,6 +63,7 @@ class RoleController extends Controller
 
     /**
      * Role add.
+     * Add and update can use one function as save(see RouteConntroller::save).
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse json
      **/
@@ -79,11 +83,11 @@ class RoleController extends Controller
         $role->name = $name;
         $role->description = $description;
 
-        //Get the route ids.
-        $routes_ids = Util::arrayPluck($array['routes'], 'id');
-        $role->routes = implode(':', $routes_ids);
+        // Get the route ids.
+        // $routes_ids = Util::arrayPluck($array['routes'], 'id');
+        $role->routes = $array['routes']; //implode(':', $routes_ids);
 
-        return $role->save() ? $this->succeed() : $this->failed();
+        return $role->save() ? $this->succeed(['id' => $role->id]) : $this->failed();
     }
 
     /**
@@ -96,28 +100,22 @@ class RoleController extends Controller
     {
         $data = $request->input('data');
         $array = json_decode($data, true);
-        $key = $array['key'];
-        $name = $array['name'];
-        if (empty($key)) return $this->failed();
-        $row = Role::where('key', $key)->first();
+        $row = Role::where('id', $id)->first();
         if (is_null($row)) return $this->failed();
-        $row->name = $name;
-        
-        //Get the route ids.
-        $routes_ids = Util::arrayPluck($array['routes'], 'id');
-        $row->routes = implode(':', $routes_ids);
-
+        foreach ($array as $k => $v) {
+            $row->$k = $v;
+        }
         return $row->save() ? $this->succeed() : $this->failed();
     }
 
     /**
      * Role delete.
-     * @param string $id The role key name.
+     * @param string $id The id.
      * @return \Illuminate\Http\JsonResponse json
      **/
     public function delete($id)
     {
-        $row = Role::where('key', $id)->first();
+        $row = Role::where('id', $id)->first();
         if ($row) $row->delete();
         return $this->succeed();
     }
