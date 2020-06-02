@@ -52,8 +52,7 @@ export const constantRoutes = [
     redirect: '/dashboard',
     meta: {
       title: 'index',
-      icon: 'mdi-chevron-up',
-      'icon-alt': 'mdi-chevron-down',
+      icon: 'mdi-home',
       affix: true
     },
     children: [
@@ -101,6 +100,81 @@ export const constantRoutes = [
         }
       }
     ]
+  },
+  {
+    id: 20,
+    name: 'ErrorPages',
+    path: '/error',
+    component: Layout,
+    meta: {
+      title: 'errorPages',
+      icon: 'mdi-alert-decagram-outline'
+    },
+    alwaysShow: true,
+    children: [
+      {
+        id: 18,
+        name: 'Page401',
+        path: '401',
+        component: () => import('@/views/error-page/401'),
+        meta: {
+          title: 'page401',
+          noCache: true
+        }
+      },
+      {
+        id: 19,
+        name: 'Page404',
+        path: '404',
+        component: () => import('@/views/error-page/404'),
+        meta: {
+          title: 'page404',
+          noCache: true
+        }
+      }
+    ]
+  },
+  {
+    id: 21,
+    path: '/error-log',
+    component: Layout,
+    meta: {
+      icon: 'mdi-bug',
+      title: 'errorLog',
+      'icon-alt': 'mdi-bug'
+    },
+    alwaysShow: true,
+    children: [
+      {
+        id: 22,
+        path: 'index',
+        component: () => import('@/views/error-log/index'),
+        meta: {
+          title: 'errorLog'
+        }
+      }
+    ]
+  },
+  {
+    id: 23,
+    path: '/profile',
+    component: Layout,
+    redirect: '/profile/index',
+    meta: {},
+    hidden: true,
+    children: [
+      {
+        id: 24,
+        name: 'Profile',
+        path: 'index',
+        component: () => import('@/views/profile/index'),
+        meta: {
+          title: 'profile',
+          noCache: true,
+          icon: 'mdi-account-cog'
+        }
+      }
+    ]
   }
 ]
 
@@ -117,9 +191,7 @@ export const asyncRoutes = [
     redirect: '/route/table',
     meta: {
       title: 'routes',
-      icon: 'mdi-chevron-up',
-      'icon-alt': 'mdi-chevron-down',
-      affix: true
+      icon: 'mdi-router-network'
     },
     children: [
       {
@@ -129,8 +201,7 @@ export const asyncRoutes = [
         component: () => import('@/views/route/table'),
         meta: {
           title: 'routeTable',
-          icon: 'mdi-router',
-          affix: true
+          icon: 'mdi-router'
         }
       }
     ]
@@ -143,8 +214,7 @@ export const asyncRoutes = [
     redirect: '/permission/page',
     meta: {
       title: 'permission',
-      icon: 'mdi-chevron-up',
-      'icon-alt': 'mdi-chevron-down'
+      icon: 'mdi-security'
     },
     alwaysShow: true,
     children: [

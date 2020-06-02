@@ -56,8 +56,7 @@
         "redirect": "\/dashboard",
         "meta": {
             "title": "index",
-            "icon": "mdi-chevron-up",
-            "icon-alt": "mdi-chevron-down",
+            "icon": "mdi-home",
             "affix": true
         },
         "alwaysShow": false,
@@ -102,9 +101,7 @@
         "redirect": "\/route\/table",
         "meta": {
             "title": "routes",
-            "icon": "mdi-chevron-up",
-            "icon-alt": "mdi-chevron-down",
-            "affix": true
+            "icon": "mdi-router-network"
         },
         "alwaysShow": false,
         "hidden": false,
@@ -117,8 +114,7 @@
                 "component": "views\/route\/table",
                 "meta": {
                     "title": "routeTable",
-                    "icon": "mdi-router",
-                    "affix": true
+                    "icon": "mdi-router"
                 },
                 "alwaysShow": false,
                 "hidden": false,
@@ -134,8 +130,7 @@
         "redirect": "\/permission\/page",
         "meta": {
             "title": "permission",
-            "icon": "mdi-chevron-up",
-            "icon-alt": "mdi-chevron-down"
+            "icon": "mdi-security"
         },
         "alwaysShow": true,
         "hidden": false,
@@ -203,6 +198,108 @@
                 "redirect": "",
                 "meta": {
                     "title": "icons"
+                },
+                "alwaysShow": false,
+                "hidden": false,
+                "constant": false
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "name": "ErrorPages",
+        "path": "\/error",
+        "component": "Layout",
+        "redirect": "",
+        "meta": {
+            "title": "errorPages",
+            "icon": "mdi-alert-decagram-outline"
+        },
+        "alwaysShow": true,
+        "hidden": false,
+        "constant": true,
+        "children": [
+            {
+                "id": 18,
+                "name": "Page401",
+                "path": "401",
+                "component": "views\/error-page\/401",
+                "redirect": "",
+                "meta": {
+                    "title": "page401",
+                    "noCache": true
+                },
+                "alwaysShow": false,
+                "hidden": false,
+                "constant": false
+            },
+            {
+                "id": 19,
+                "name": "Page404",
+                "path": "404",
+                "component": "views\/error-page\/404",
+                "redirect": "",
+                "meta": {
+                    "title": "page404",
+                    "noCache": true
+                },
+                "alwaysShow": false,
+                "hidden": false,
+                "constant": false
+            }
+        ]
+    },
+    {
+        "id": 21,
+        "name": "",
+        "path": "\/error-log",
+        "component": "Layout",
+        "redirect": "",
+        "meta": {
+            "icon": "mdi-bug",
+            "title": "errorLog",
+            "icon-alt": "mdi-bug"
+        },
+        "alwaysShow": true,
+        "hidden": false,
+        "constant": true,
+        "children": [
+            {
+                "id": 22,
+                "name": "",
+                "path": "index",
+                "component": "views\/error-log\/index",
+                "redirect": "",
+                "meta": {
+                    "title": "errorLog"
+                },
+                "alwaysShow": false,
+                "hidden": false,
+                "constant": false
+            }
+        ]
+    },
+    {
+        "id": 23,
+        "name": "",
+        "path": "\/profile",
+        "component": "Layout",
+        "redirect": "\/profile\/index",
+        "meta": {},
+        "alwaysShow": false,
+        "hidden": true,
+        "constant": true,
+        "children": [
+            {
+                "id": 24,
+                "name": "Profile",
+                "path": "index",
+                "component": "views\/profile\/index",
+                "redirect": "",
+                "meta": {
+                    "title": "profile",
+                    "noCache": true,
+                    "icon": "mdi-account-cog"
                 },
                 "alwaysShow": false,
                 "hidden": false,
