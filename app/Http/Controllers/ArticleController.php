@@ -105,7 +105,21 @@ class ArticleController extends Controller
         return $article->save() ? $this->succeed(['id' => $article->id]) : $this->failed();
     }
 
-   /**
+    /**
+     * 删除
+     * @param number $id
+     * @return \Illuminate\Http\JsonResponse json
+     **/
+    public function delete($id)
+    {
+        $article = Article::where('id', $id)->first();
+        if (! is_null($article)) {
+            $article->delete();
+        }
+        return $this->succeed();
+    }
+
+    /**
      * Update one.
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse json
@@ -113,7 +127,9 @@ class ArticleController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
-        $data['display_time'] = Carbon::createFromTimestamp(strtotime($data['display_time']));
+        if (! empty($data['display_time'])) {
+            $data['display_time'] = Carbon::createFromTimestamp(strtotime($data['display_time']));
+        }
         $article = Article::where('id', $data['id'])->first();
         if (is_null($article)) return $this->failed();
         foreach ($data as $name => $value) {

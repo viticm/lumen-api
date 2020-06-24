@@ -69,6 +69,7 @@ $router->group(['prefix' => 'lumen-api'], function () use ($router) {
         $router->get('article/pv', 'ArticleController@pv');
         $router->post('article/create', 'ArticleController@create');
         $router->post('article/update', 'ArticleController@update');
+        $router->delete('article/delete/{id}', 'ArticleController@delete');
 
         //Search operate.
         $router->get('search/user', 'TransactionController@users');

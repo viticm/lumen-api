@@ -81,7 +81,7 @@ export const constantRoutes = [
     ]
   },
   {
-    id: 16,
+    id: 17,
     name: 'icons',
     path: '/icons',
     component: Layout,
@@ -91,7 +91,7 @@ export const constantRoutes = [
     alwaysShow: true,
     children: [
       {
-        id: 17,
+        id: 16,
         name: 'IconShow',
         path: 'index',
         component: () => import('@/views/icons'),
@@ -106,6 +106,7 @@ export const constantRoutes = [
     name: 'ErrorPages',
     path: '/error',
     component: Layout,
+    redirect: 'noRedirect',
     meta: {
       title: 'errorPages',
       icon: 'mdi-alert-decagram-outline'
@@ -135,7 +136,7 @@ export const constantRoutes = [
     ]
   },
   {
-    id: 21,
+    id: 22,
     path: '/error-log',
     component: Layout,
     meta: {
@@ -146,7 +147,7 @@ export const constantRoutes = [
     alwaysShow: true,
     children: [
       {
-        id: 22,
+        id: 21,
         path: 'index',
         component: () => import('@/views/error-log/index'),
         meta: {
@@ -156,15 +157,15 @@ export const constantRoutes = [
     ]
   },
   {
-    id: 23,
+    id: 24,
     path: '/profile',
     component: Layout,
     redirect: '/profile/index',
-    meta: {},
+    meta: [],
     hidden: true,
     children: [
       {
-        id: 24,
+        id: 23,
         name: 'Profile',
         path: 'index',
         component: () => import('@/views/profile/index'),
@@ -172,6 +173,37 @@ export const constantRoutes = [
           title: 'profile',
           noCache: true,
           icon: 'mdi-account-cog'
+        }
+      }
+    ]
+  },
+  {
+    id: 30,
+    name: 'Table',
+    path: '/table',
+    component: Layout,
+    redirect: '/table/complex-table',
+    meta: {
+      title: 'table',
+      icon: 'mdi-table'
+    },
+    children: [
+      {
+        id: 31,
+        name: 'DynamicTable',
+        path: 'dynamic-table',
+        component: () => import('@/views/table/dynamic-table/index'),
+        meta: {
+          title: 'dynamicTable'
+        }
+      },
+      {
+        id: 32,
+        name: 'ComplexTable',
+        path: 'complex-table',
+        component: () => import('@/views/table/complex-table'),
+        meta: {
+          title: 'complexTable'
         }
       }
     ]
@@ -243,6 +275,58 @@ export const asyncRoutes = [
         component: () => import('@/views/permission/role'),
         meta: {
           title: 'rolePermission'
+        }
+      }
+    ]
+  },
+  {
+    id: 29,
+    name: 'Nested',
+    path: '/nested',
+    component: Layout,
+    redirect: '/nested/menu1/menu1-1',
+    meta: {
+      title: 'nested',
+      icon: 'mdi-view-list'
+    },
+    children: [
+      {
+        id: 27,
+        name: 'Menu1',
+        path: 'menu1',
+        component: () => import('@/views/nested/menu1/index'),
+        redirect: '/nested/menu1/menu1-1',
+        meta: {
+          title: 'menu1'
+        },
+        children: [
+          {
+            id: 25,
+            name: 'Menu1-1',
+            path: 'menu1-1',
+            component: () => import('@/views/nested/menu1/menu1-1'),
+            meta: {
+              title: 'menu1-1'
+            }
+          },
+          {
+            id: 26,
+            name: 'Menu1-2',
+            path: 'menu1-2',
+            component: () => import('@/views/nested/menu1/menu1-2'),
+            meta: {
+              title: 'menu1-2'
+            }
+          }
+        ]
+      },
+      {
+        id: 28,
+        name: 'Menu2',
+        path: 'menu2',
+        component: () => import('@/views/nested/menu2/index'),
+        meta: {
+          title: 'menu2'
         }
       }
     ]

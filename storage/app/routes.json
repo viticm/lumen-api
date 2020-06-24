@@ -178,7 +178,7 @@
         ]
     },
     {
-        "id": 16,
+        "id": 17,
         "name": "icons",
         "path": "\/icons",
         "component": "Layout",
@@ -191,7 +191,7 @@
         "constant": true,
         "children": [
             {
-                "id": 17,
+                "id": 16,
                 "name": "IconShow",
                 "path": "index",
                 "component": "views\/icons",
@@ -210,7 +210,7 @@
         "name": "ErrorPages",
         "path": "\/error",
         "component": "Layout",
-        "redirect": "",
+        "redirect": "noRedirect",
         "meta": {
             "title": "errorPages",
             "icon": "mdi-alert-decagram-outline"
@@ -250,7 +250,7 @@
         ]
     },
     {
-        "id": 21,
+        "id": 22,
         "name": "",
         "path": "\/error-log",
         "component": "Layout",
@@ -265,7 +265,7 @@
         "constant": true,
         "children": [
             {
-                "id": 22,
+                "id": 21,
                 "name": "",
                 "path": "index",
                 "component": "views\/error-log\/index",
@@ -280,18 +280,18 @@
         ]
     },
     {
-        "id": 23,
+        "id": 24,
         "name": "",
         "path": "\/profile",
         "component": "Layout",
         "redirect": "\/profile\/index",
-        "meta": {},
+        "meta": [],
         "alwaysShow": false,
         "hidden": true,
         "constant": true,
         "children": [
             {
-                "id": 24,
+                "id": 23,
                 "name": "Profile",
                 "path": "index",
                 "component": "views\/profile\/index",
@@ -300,6 +300,118 @@
                     "title": "profile",
                     "noCache": true,
                     "icon": "mdi-account-cog"
+                },
+                "alwaysShow": false,
+                "hidden": false,
+                "constant": false
+            }
+        ]
+    },
+    {
+        "id": 29,
+        "name": "Nested",
+        "path": "\/nested",
+        "component": "Layout",
+        "redirect": "\/nested\/menu1\/menu1-1",
+        "meta": {
+            "title": "nested",
+            "icon": "mdi-view-list"
+        },
+        "alwaysShow": false,
+        "hidden": false,
+        "constant": false,
+        "children": [
+            {
+                "id": 27,
+                "name": "Menu1",
+                "path": "menu1",
+                "component": "views\/nested\/menu1\/index",
+                "redirect": "\/nested\/menu1\/menu1-1",
+                "meta": {
+                    "title": "menu1"
+                },
+                "alwaysShow": false,
+                "hidden": false,
+                "constant": false,
+                "children": [
+                    {
+                        "id": 25,
+                        "name": "Menu1-1",
+                        "path": "menu1-1",
+                        "component": "views\/nested\/menu1\/menu1-1",
+                        "redirect": "",
+                        "meta": {
+                            "title": "menu1-1"
+                        },
+                        "alwaysShow": false,
+                        "hidden": false,
+                        "constant": false
+                    },
+                    {
+                        "id": 26,
+                        "name": "Menu1-2",
+                        "path": "menu1-2",
+                        "component": "views\/nested\/menu1\/menu1-2",
+                        "redirect": "",
+                        "meta": {
+                            "title": "menu1-2"
+                        },
+                        "alwaysShow": false,
+                        "hidden": false,
+                        "constant": false
+                    }
+                ]
+            },
+            {
+                "id": 28,
+                "name": "Menu2",
+                "path": "menu2",
+                "component": "views\/nested\/menu2\/index",
+                "redirect": "",
+                "meta": {
+                    "title": "menu2"
+                },
+                "alwaysShow": false,
+                "hidden": false,
+                "constant": false
+            }
+        ]
+    },
+    {
+        "id": 30,
+        "name": "Table",
+        "path": "\/table",
+        "component": "Layout",
+        "redirect": "\/table\/complex-table",
+        "meta": {
+            "title": "table",
+            "icon": "mdi-table"
+        },
+        "alwaysShow": false,
+        "hidden": false,
+        "constant": true,
+        "children": [
+            {
+                "id": 31,
+                "name": "DynamicTable",
+                "path": "dynamic-table",
+                "component": "views\/table\/dynamic-table\/index",
+                "redirect": "",
+                "meta": {
+                    "title": "dynamicTable"
+                },
+                "alwaysShow": false,
+                "hidden": false,
+                "constant": false
+            },
+            {
+                "id": 32,
+                "name": "ComplexTable",
+                "path": "complex-table",
+                "component": "views\/table\/complex-table",
+                "redirect": "",
+                "meta": {
+                    "title": "complexTable"
                 },
                 "alwaysShow": false,
                 "hidden": false,
