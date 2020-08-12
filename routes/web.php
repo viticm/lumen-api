@@ -38,6 +38,17 @@ $router->group(['prefix' => 'lumen-api'], function () use ($router) {
         return 'acc: ' . $id;
     });
 
+    // The game apis.
+    $router->get('game/server/list', 'GameController@serverList');
+    $router->get('game/server/detail', 'GameController@serverDetail');
+    $router->post('game/server/save', 'GameController@serverSave');
+    $router->delete('game/server/delete/{id}', 'GameController@serverDelete');
+    $router->get('game/serveropt/list', 'GameController@serverOptList');
+    $router->get('game/serveropt/detail', 'GameController@serverOptDetail');
+    $router->get('game/serveropt/exists-one', 'GameController@serverOptExistsOne');
+    $router->post('game/serveropt/save', 'GameController@serverOptSave');
+    $router->delete('game/serveropt/delete/{id}', 'GameController@serverOptDelete');
+
     $router->group(['middleware' => 'auth'], function () use ($router) {
 
         $router->get('/', function () {

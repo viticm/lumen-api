@@ -178,7 +178,7 @@ export const constantRoutes = [
     ]
   },
   {
-    id: 30,
+    id: 32,
     name: 'Table',
     path: '/table',
     component: Layout,
@@ -189,7 +189,7 @@ export const constantRoutes = [
     },
     children: [
       {
-        id: 31,
+        id: 30,
         name: 'DynamicTable',
         path: 'dynamic-table',
         component: () => import('@/views/table/dynamic-table/index'),
@@ -198,13 +198,132 @@ export const constantRoutes = [
         }
       },
       {
-        id: 32,
+        id: 31,
         name: 'ComplexTable',
         path: 'complex-table',
         component: () => import('@/views/table/complex-table'),
         meta: {
           title: 'complexTable'
         }
+      }
+    ]
+  },
+  {
+    id: 36,
+    name: 'Example',
+    path: '/example',
+    component: Layout,
+    redirect: '/example/list',
+    meta: {
+      title: 'example',
+      icon: 'mdi-orbit'
+    },
+    alwaysShow: true,
+    children: [
+      {
+        id: 33,
+        name: 'ArticleList',
+        path: 'list',
+        component: () => import('@/views/example/list'),
+        meta: {
+          title: 'articleList',
+          icon: 'mdi-playlist-edit'
+        }
+      },
+      {
+        id: 34,
+        name: 'CreateArticle',
+        path: 'create',
+        component: () => import('@/views/example/create'),
+        meta: {
+          icon: 'mdi-pencil-box',
+          title: 'createArticle'
+        }
+      },
+      {
+        id: 35,
+        name: 'EditArticle',
+        path: 'edit/:id(\\d+)',
+        component: () => import('@/views/example/edit'),
+        meta: {
+          title: 'editArticle',
+          noCache: true,
+          activeMenu: '/example/list'
+        },
+        hidden: true
+      }
+    ]
+  },
+  {
+    id: 43,
+    name: 'Game',
+    path: '/game',
+    component: Layout,
+    redirect: '/game/server-list',
+    meta: {
+      title: 'game',
+      icon: 'mdi-gamepad-variant'
+    },
+    children: [
+      {
+        id: 37,
+        name: 'ServerList',
+        path: '/game/server-list',
+        component: () => import('@/views/game/server-list'),
+        meta: {
+          icon: 'mdi-format-list-bulleted',
+          title: 'serverList'
+        }
+      },
+      {
+        id: 38,
+        name: 'ServerOptList',
+        path: '/game/server-opt-list',
+        component: () => import('@/views/game/server-opt-list'),
+        meta: {
+          icon: 'mdi-format-list-checks',
+          title: 'serverOptList'
+        }
+      },
+      {
+        id: 39,
+        name: 'ServerCreate',
+        path: 'server-create',
+        component: () => import('@/views/game/server-create'),
+        meta: {
+          title: 'serverCreate'
+        },
+        hidden: true
+      },
+      {
+        id: 40,
+        name: 'ServerEdit',
+        path: 'server-edit/:id(\\d+)',
+        component: () => import('@/views/game/server-edit'),
+        meta: {
+          title: 'serverEdit'
+        },
+        hidden: true
+      },
+      {
+        id: 41,
+        name: 'ServerOptCreate',
+        path: 'server-opt-create',
+        component: () => import('@/views/game/server-opt-create'),
+        meta: {
+          title: 'serverOptCreate'
+        },
+        hidden: true
+      },
+      {
+        id: 42,
+        name: 'ServerOptEdit',
+        path: 'server-opt-edit/:id(\\d+)',
+        component: () => import('@/views/game/server-opt-edit'),
+        meta: {
+          title: 'serverOptEdit'
+        },
+        hidden: true
       }
     ]
   }

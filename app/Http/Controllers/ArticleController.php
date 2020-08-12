@@ -68,7 +68,7 @@ class ArticleController extends Controller
     {
         $id = $request->input('id');
         $row = Article::where('id', $id)->first();
-        Log::info('The detail: ', $row->toArray());
+        $row->platforms = json_decode($row->platforms, true);
         return ! is_null($row) ? $this->succeed($row) : $this->failed();
     }
 

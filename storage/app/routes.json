@@ -378,7 +378,7 @@
         ]
     },
     {
-        "id": 30,
+        "id": 32,
         "name": "Table",
         "path": "\/table",
         "component": "Layout",
@@ -392,7 +392,7 @@
         "constant": true,
         "children": [
             {
-                "id": 31,
+                "id": 30,
                 "name": "DynamicTable",
                 "path": "dynamic-table",
                 "component": "views\/table\/dynamic-table\/index",
@@ -405,7 +405,7 @@
                 "constant": false
             },
             {
-                "id": 32,
+                "id": 31,
                 "name": "ComplexTable",
                 "path": "complex-table",
                 "component": "views\/table\/complex-table",
@@ -415,6 +415,161 @@
                 },
                 "alwaysShow": false,
                 "hidden": false,
+                "constant": false
+            }
+        ]
+    },
+    {
+        "id": 36,
+        "name": "Example",
+        "path": "\/example",
+        "component": "Layout",
+        "redirect": "\/example\/list",
+        "meta": {
+            "title": "example",
+            "icon": "mdi-orbit"
+        },
+        "alwaysShow": true,
+        "hidden": false,
+        "constant": true,
+        "children": [
+            {
+                "id": 33,
+                "name": "ArticleList",
+                "path": "list",
+                "component": "views\/example\/list",
+                "redirect": "",
+                "meta": {
+                    "title": "articleList",
+                    "icon": "mdi-playlist-edit"
+                },
+                "alwaysShow": false,
+                "hidden": false,
+                "constant": false
+            },
+            {
+                "id": 34,
+                "name": "CreateArticle",
+                "path": "create",
+                "component": "views\/example\/create",
+                "redirect": "",
+                "meta": {
+                    "icon": "mdi-pencil-box",
+                    "title": "createArticle"
+                },
+                "alwaysShow": false,
+                "hidden": false,
+                "constant": false
+            },
+            {
+                "id": 35,
+                "name": "EditArticle",
+                "path": "edit\/:id(\\\\d+)",
+                "component": "views\/example\/edit",
+                "redirect": "",
+                "meta": {
+                    "title": "editArticle",
+                    "noCache": true,
+                    "activeMenu": "\/example\/list"
+                },
+                "alwaysShow": false,
+                "hidden": true,
+                "constant": false
+            }
+        ]
+    },
+    {
+        "id": 43,
+        "name": "Game",
+        "path": "\/game",
+        "component": "Layout",
+        "redirect": "\/game\/server-list",
+        "meta": {
+            "title": "game",
+            "icon": "mdi-gamepad-variant"
+        },
+        "alwaysShow": false,
+        "hidden": false,
+        "constant": true,
+        "children": [
+            {
+                "id": 37,
+                "name": "ServerList",
+                "path": "\/game\/server-list",
+                "component": "views\/game\/server-list",
+                "redirect": "",
+                "meta": {
+                    "icon": "mdi-format-list-bulleted",
+                    "title": "serverList"
+                },
+                "alwaysShow": false,
+                "hidden": false,
+                "constant": false
+            },
+            {
+                "id": 38,
+                "name": "ServerOptList",
+                "path": "\/game\/server-opt-list",
+                "component": "views\/game\/server-opt-list",
+                "redirect": "",
+                "meta": {
+                    "icon": "mdi-format-list-checks",
+                    "title": "serverOptList"
+                },
+                "alwaysShow": false,
+                "hidden": false,
+                "constant": false
+            },
+            {
+                "id": 39,
+                "name": "ServerCreate",
+                "path": "server-create",
+                "component": "views\/game\/server-create",
+                "redirect": "",
+                "meta": {
+                    "title": "serverCreate"
+                },
+                "alwaysShow": false,
+                "hidden": true,
+                "constant": false
+            },
+            {
+                "id": 40,
+                "name": "ServerEdit",
+                "path": "server-edit\/:id(\\\\d+)",
+                "component": "views\/game\/server-edit",
+                "redirect": "",
+                "meta": {
+                    "title": "serverEdit"
+                },
+                "alwaysShow": false,
+                "hidden": true,
+                "constant": false
+            },
+            {
+                "id": 41,
+                "name": "ServerOptCreate",
+                "path": "server-opt-create",
+                "component": "views\/game\/server-opt-create",
+                "redirect": "",
+                "meta": {
+                    "title": "serverOptCreate"
+                },
+                "alwaysShow": false,
+                "hidden": true,
+                "constant": false
+            },
+            {
+                "id": 42,
+                "name": "ServerOptEdit",
+                "path": "server-opt-edit\/:id(\\\\d+)",
+                "component": "views\/game\/server-opt-edit",
+                "redirect": "",
+                "meta": {
+                    "title": "serverOptEdit"
+                },
+                "alwaysShow": false,
+                "hidden": true,
                 "constant": false
             }
         ]

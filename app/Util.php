@@ -57,6 +57,7 @@ class Util
         $r = preg_replace('/"(\w+)":/', '$1:', $jsonStr);
         $r = str_replace('\/', '/', $r);
         $r = str_replace('"', '\'', $r);
+        $r = str_replace('\\\\', '\\', $r);
         $r = str_replace('    ', '  ', $r);
         return $r;
     }

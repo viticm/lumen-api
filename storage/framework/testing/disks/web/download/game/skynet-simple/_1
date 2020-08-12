@@ -1,0 +1,9 @@
+{
+    "server_name": "test",
+    "type": "world",
+    "server_id": "1",
+    "port": 2333,
+    "db_name": "leafly_game",
+    "inner_ip": "0.0.0.0",
+    "net_ip": "0.0.0.0"
+}
