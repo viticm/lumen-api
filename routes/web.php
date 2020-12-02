@@ -48,6 +48,8 @@ $router->group(['prefix' => 'lumen-api'], function () use ($router) {
     $router->get('game/serveropt/exists-one', 'GameController@serverOptExistsOne');
     $router->post('game/serveropt/save', 'GameController@serverOptSave');
     $router->delete('game/serveropt/delete/{id}', 'GameController@serverOptDelete');
+    $router->post('game/user/create', 'GameController@userCreate');
+    $router->post('game/user/login', 'GameController@userLogin');
 
     $router->group(['middleware' => 'auth'], function () use ($router) {
 

@@ -182,8 +182,66 @@ class GameController extends Controller
         if (! is_null($data['pcl'])) {
             $array['pcl'] = json_decode($data['pcl'], true);
         }
+        if (! is_null($data['cluster'])) {
+            $array['cluster'] = json_decode($data['cluster'], true);
+        }
+        if ($array['cluster']) {
+            $clusterNode = array();
+            if (file_exists(static::$settingPath)) {
+                $clusterNode = json_decode(file_get_contents(static::$settingPath), true);
+            }
+            $clusterName = $array['cluster']['name'];
+            $clusterAddr = $array['cluster']['addr'];
+            $clusterNode[$clusterName] = $clusterAddr;
+            file_put_contents(static::$settingPath . 'cluster.json', json_encode($clusterNode, JSON_PRETTY_PRINT));
+        }
+        $removeKeys = [];
+        foreach ($array as $key => $value) {
+            if (is_null($value)) {
+                array_push($removeKeys, $key);
+            }
+        }
+        foreach ($removeKeys as $key) {
+            unset($array[$key]);
+        }
         Log::info('The data:', $array);
         file_put_contents(static::$settingPath . $filename, json_encode($array, JSON_PRETTY_PRINT));
+    }
+
+    /**
+     * User create.
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse json
+     **/
+    public function userCreate(Request $request)
+    {
+        return $this->succeed();
+    }
+
+    /**
+     * User login.
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse json
+     **/
+    public function userLogin(Request $request)
+    {
+        $sign_key = 'O6YuI4eS@l!N9WUs';
+        $data = $request->input('data');
+        $check_sign = $request->input('sign');
+        if (md5($data . $sign_key) !== $check_sign) {
+            return $this->failed('sign check failed', 1);
+        }
+        $info = json_decode($data, true);
+        
+        Log::info('The data:', $info);
+        $data = array(
+            'status' => 1,
+            'id' => $info['user_name'],
+            'special' => 1,
+            'channel' => 100,
+            'model' => 1
+        );
+        return $this->succeed(['user_info' => $data]);
     }
 
 }
