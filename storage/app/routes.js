@@ -326,6 +326,16 @@ export const constantRoutes = [
         hidden: true
       }
     ]
+  },
+  {
+    id: 44,
+    name: 'Someone',
+    path: '/someone',
+    component: () => import('@/views/other/someone'),
+    meta: {
+      title: 'someone'
+    },
+    hidden: true
   }
 ]
 

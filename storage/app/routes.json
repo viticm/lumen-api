@@ -573,5 +573,18 @@
                 "constant": false
             }
         ]
+    },
+    {
+        "id": 44,
+        "name": "Someone",
+        "path": "\/someone",
+        "component": "views\/other\/someone",
+        "redirect": "",
+        "meta": {
+            "title": "someone"
+        },
+        "alwaysShow": false,
+        "hidden": true,
+        "constant": true
     }
 ]

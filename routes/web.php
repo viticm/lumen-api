@@ -50,6 +50,7 @@ $router->group(['prefix' => 'lumen-api'], function () use ($router) {
     $router->delete('game/serveropt/delete/{id}', 'GameController@serverOptDelete');
     $router->post('game/user/create', 'GameController@userCreate');
     $router->post('game/user/login', 'GameController@userLogin');
+    $router->post('other/someone/save', 'SomeoneController@sendMail');
 
     $router->group(['middleware' => 'auth'], function () use ($router) {
 
