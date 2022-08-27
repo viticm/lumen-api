@@ -115,7 +115,7 @@ class AuthController extends Controller
      * 用户认证（框架提供的方式比较齐全，但内容也相对多，不建议API使用）
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse json
-     */ 
+     */
     public function authenticate(Request $request)
     {
         $email = $request->input('username');

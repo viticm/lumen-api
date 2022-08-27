@@ -21,21 +21,21 @@ class GenerateUserCommand extends Command
 
     /**
      * 命令名称
-     * 
+     *
      * @var string
-     */ 
-    protected $signature = 'gen_user {email} {username} {password} {roles}';
+     */
+    protected $signature = 'gen_user {email} {username} {password} {role}';
 
     /**
      * 命令描述
-     * 
+     *
      * @var string
      */
     protected $description = 'Generate or update a user of admin';
 
     /**
      * Create a new command instance.
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -47,7 +47,7 @@ class GenerateUserCommand extends Command
      * 命令执行处理函数
      *
      * @return mixed
-     */ 
+     */
     public function handle()
     {
         $email = $this->argument('email');
@@ -59,25 +59,26 @@ class GenerateUserCommand extends Command
         $passwordHasher = new PasswordHash(8, false);
         $encrypt_password = $passwordHasher->HashPassword($password);
         $showtime = date("Y-m-d H:i:s");
-        $roles = json_encode(explode(':', $this->argument('roles')));
+        // $role = json_encode(explode(':', $this->argument('role')));
+        $role = $this->argument('role');
         echo 'show time: ' . $showtime . "\n";
         $id = -1;
         if ($row !== null) {
             // echo "en: " . $encrypt_password . "\n";
             echo 'user: ' . $username . ' update to: ' . $password . "\n";
             $row->password = $encrypt_password;
-            $row->roles = $roles;
+            $row->role = $role;
             print_r($row->updated_at);
             $row->save();
             $id = $row->id;
         } else {
             $avatar = 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif';
-            if (strpos($roles, 'admin') !== false)
+            if (strpos($role, 'admin') !== false)
                 $avatar = 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif';
             $user = new User();
             $user->email = $email;
             $user->username = $username;
-            $user->roles = $roles;
+            $user->role = $role;
             $user->password = $encrypt_password;
             $user->avatar = $avatar;
             if (false === $user->save()) {
